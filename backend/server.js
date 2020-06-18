@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
+const mealsRouter = require('./routes/meals.routes');
+const usersRouter = require('./routes/users.routes');
 
 const app = express();
 
@@ -14,7 +16,11 @@ mongoose.connection.once('open', () => {
     console.log('Server established connection to MongoDB database successfully');
 }); 
 
+// Routers
+app.use('/meals', mealsRouter);
+app.use('/users', usersRouter);
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server started and listening on port: ${port}`);
-})
+});
