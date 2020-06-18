@@ -10,12 +10,15 @@ router.route('/')
         res.status(400).json('Error: ' + err);
     }
 })
-.post((req, res) => {
+.post(async (req, res) => {
     const username = req.body.username;
-    const newUser = new User({username});
-    newUser.save()
-    .then(() => res.json('Username saved to DB'))
-    .catch(err => res.status(400).json('Error: ' + err));
+    try {
+        const newUser = new User({username});
+        const savedUser = await newUser.save();
+        res.json(`Username ${savedUser.username} saved to DB`);
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    } 
 });
 
 module.exports = router;
