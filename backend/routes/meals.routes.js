@@ -31,4 +31,42 @@ router.route('/')
     }
 });
 
+router.route('/:id')
+.get(async (req, res) => {
+    try {
+        const foundMealLog = await Meal.findById(req.params.id);
+        res.json(foundMealLog);
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+})
+.delete(async (req, res) => {
+    try {
+        const deletedMealLog = await Meal.findByIdAndDelete(req.params.id);
+        res.json(`Meal log ${deletedMealLog.id} deleted successfully`)
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+})
+.put(async (req, res) => {
+    const {username, description, calories, date} = req.body
+    let foundMealLog = {};
+    try {
+        foundMealLog = await Meal.findById(req.params.id);
+        foundMealLog.username = username;
+        foundMealLog.description = description;
+        foundMealLog.calories = Number(calories);
+        foundMealLog.date = Date.parse(date);
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+
+    try {
+        const savedMealLog = await foundMealLog.save();
+        res.json(`Meal log ${savedMealLog.id} updated.`);
+    } catch (err) {
+        res.status(400).json('Error: ' + err);
+    }
+});
+
 module.exports = router;
