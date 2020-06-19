@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import axios from 'axios';
 
 
 function CreateMealLog() {
@@ -14,13 +15,19 @@ function CreateMealLog() {
     });
 
     useEffect(() => {
-        setMealLogEntry(preValue => {
-            return {
-                ...preValue,
-                existingUsers: ['some example user'],
-                username: 'some example user'
+
+        (async ()=> {
+            const response = await axios.get('http://localhost:4000/users');
+            if (response.data.length > 0) {
+                setMealLogEntry(preValue => {
+                    return {
+                        ...preValue,
+                        existingUsers: response.data.map(user => user.username),
+                        username: response.data[0].username
+                    }
+                });
             }
-        });
+        })();
     }, []);
 
     function handleChange(event) {
@@ -43,7 +50,7 @@ function CreateMealLog() {
         })
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const mealLog = {
@@ -53,7 +60,8 @@ function CreateMealLog() {
             date: mealLogEntry.date
         }
 
-        console.log(mealLog);
+        const res = await axios.post('http://localhost:4000/meals', mealLog);
+        console.log(res.data);
 
         setMealLogEntry(preValue => {
             return {
@@ -64,8 +72,6 @@ function CreateMealLog() {
                 date: new Date()
             }
         });
-
-        window.location = '/';
     }
 
     function displayUsernames() {
