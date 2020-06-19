@@ -24,7 +24,7 @@ nodemon server
 ```
 
 
-## FontEnd instructions:
+## FrontEnd instructions:
 
 Ensure you're on the project root directory. Then run `npm install` to install all required packages:
 ```
