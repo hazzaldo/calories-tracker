@@ -4,9 +4,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #f8f5fd 50%, #ffffff 50%);
-  min-height: 1000px;
   font-family: 'helvetica neue';
-
 }
 
 code {
@@ -15,6 +13,10 @@ code {
 }
 
 nav {
-  background-color: #e3f2fd;
+  background-color: #79c4fa;
   box-shadow: 1px 3px  rgba(0, 0, 0, 0.3);
+}
+
+.form-container {
+  margin: 3rem;
 }
