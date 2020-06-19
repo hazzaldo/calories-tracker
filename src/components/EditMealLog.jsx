@@ -26,7 +26,6 @@ function EditMealLog(props){
                             existingUsers: response.data.map(user => user.username)
                         }
                     });
-                    console.log(`Existing Users set with: ${response.data}`);
                 } else {
                     console('No data found from server, for fetching all users');
                 }
@@ -41,7 +40,6 @@ function EditMealLog(props){
         (async ()=> {
             try {
                 const response = await axios.get('http://localhost:4000/meals/'+props.match.params.id);
-                console.log(response.data);
                 const { username, description, calories, date } = response.data;
                 setMealLogEntry(preValue => {
                     return {
@@ -53,10 +51,10 @@ function EditMealLog(props){
                     }
                 });
             } catch (err) {
-                console.log(`Server request error for meal log edit. Error: ${err}`);
+                console.log(`Server request error fetching meal log for edit. Error: ${err}`);
             } 
         })();
-    }, []);
+    }, [props.match.params.id]);
 
     function handleChange(event) {
         const { name, value } = event.target;
