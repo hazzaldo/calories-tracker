@@ -13,7 +13,7 @@ function App() {
       <Route path="/" exact component={MealLogs} />
       <Route path="/user" component={CreateUser} />
       <Route path="/meal" component={CreateMealLog} />
-      <Route path="/edit:id" component={EditMealLog} />
+      <Route path="/edit/:id" component={EditMealLog} />
     </Router>
   );
 }
