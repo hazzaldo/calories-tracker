@@ -17,15 +17,23 @@ function CreateMealLog() {
     useEffect(() => {
 
         (async ()=> {
-            const response = await axios.get('http://localhost:4000/users');
-            if (response.data.length > 0) {
-                setMealLogEntry(preValue => {
-                    return {
-                        ...preValue,
-                        existingUsers: response.data.map(user => user.username),
-                        username: response.data[0].username
-                    }
-                });
+            try {
+                const response = await axios.get('http://localhost:4000/users');
+                if (response.data.length > 0) {
+                    setMealLogEntry(preValue => {
+                        return {
+                            ...preValue,
+                            existingUsers: response.data.map(user => user.username),
+                            username: response.data[0].username
+                        }
+                    });
+
+                } else {
+                    console('No data found from server, for fetching all users');
+                }
+
+            } catch (err) {
+                console.log(`Server request error fetching all users. Error: ${err}`);
             }
         })();
     }, []);
@@ -60,9 +68,13 @@ function CreateMealLog() {
             date: mealLogEntry.date
         }
 
-        const res = await axios.post('http://localhost:4000/meals', mealLog);
-        console.log(res.data);
-
+        try {
+            const res = await axios.post('http://localhost:4000/meals', mealLog);
+            console.log(res.data);
+        } catch (err) {
+            console.log(`Server request error posting (POST) meal log. Error: ${err}`);
+        }
+        
         setMealLogEntry(preValue => {
             return {
                 ...preValue,
@@ -81,7 +93,7 @@ function CreateMealLog() {
                 values={user}>
                 {user}
                 </option>
-        })
+        });
     }
 
     return (
