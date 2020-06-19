@@ -22,7 +22,7 @@ function MealLogs() {
 
     async function deleteMealLog(id) {
         try {
-            const response = await axios.delete('http://localhost:4000/meals'+id);
+            const response = await axios.delete('http://localhost:4000/meals/'+id);
             console.log(response.data);
             setMealLogs(
                 mealLogs.filter(mealLog => mealLog._id !== id)
