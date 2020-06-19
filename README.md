@@ -5,7 +5,7 @@ Calories Tracker allows you to track the calories' intakes of different users. Y
 - Create a meal log - to record which user had what meal. As well as the number of calories and date.
 - Edit and delete existing meal logs.
 
-## Backend instructions
+## Backend instructions:
 
 From the project root directory navigate to the folder `backend`:
 
@@ -18,7 +18,7 @@ Ensure to run `npm install` to install all required packages:
 npm install
 ```
 
-Then run the command below to start the server which will start listening on port 4000 and connect to the MongoDB Atals database. 
+Then run the command below to start the server which will start listening on port 4000 and connect to the MongoDB Atlas database. 
 ```
 nodemon server
 ```
