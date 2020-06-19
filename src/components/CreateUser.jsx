@@ -21,10 +21,14 @@ function CreateUser() {
         const newUser = {
             username: user.username,
         }
-
-        const res = await axios.post('http://localhost:4000/users', user);
-        console.log(res.data);
-
+        
+        try {
+            const res = await axios.post('http://localhost:4000/users', newUser);
+            console.log(res.data);
+        } catch (err) {
+            console.log(`Error posting (POST) new user to server. Error: ${err}`);
+        }
+        
         setUser({
             username: ""
         });
