@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function CreateUser() {
 
@@ -14,14 +15,15 @@ function CreateUser() {
         });
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
 
         const newUser = {
             username: user.username,
         }
 
-        console.log(newUser);
+        const res = await axios.post('http://localhost:4000/users', user);
+        console.log(res.data);
 
         setUser({
             username: ""
