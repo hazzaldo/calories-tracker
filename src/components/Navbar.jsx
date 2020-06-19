@@ -10,7 +10,6 @@ function Navbar() {
           <Link to='/' className='nav-item nav-link'>All Meal Logs</Link>
           <Link to='/user' className='nav-item nav-link'>Create User</Link>
           <Link to='/meal' className='nav-item nav-link'>Create Meal Log</Link>
-          <Link to='/edit/:id' className='nav-item nav-link'>Edit Meal Log</Link>
         </div>
       </div>
     </nav>
