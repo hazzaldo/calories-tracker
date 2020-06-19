@@ -13,9 +13,11 @@ function MealLogs() {
                 const response = await axios.get('http://localhost:4000/meals');
                 if (response.data.length > 0) {
                     setMealLogs(response.data);
+                } else {
+                    console.log(`No meal logs data found.`)
                 }
             } catch (err) {
-                console.log(`Error loading meal logs: ${err}`);
+                console.log(`Error fetching all meal logs: ${err}`);
             } 
         })();
     }, []);
